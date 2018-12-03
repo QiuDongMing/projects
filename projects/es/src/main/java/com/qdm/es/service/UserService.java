@@ -1,22 +1,7 @@
 package com.qdm.es.service;
 
-import com.alibaba.fastjson.JSON;
 import com.qdm.es.data.User;
-import com.qdm.es.utils.MapUtil;
-import org.elasticsearch.action.ActionFuture;
-import org.elasticsearch.action.DocWriteRequest;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.client.transport.TransportClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author qiudm
