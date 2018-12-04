@@ -36,6 +36,7 @@ public class EsConfig implements FactoryBean<TransportClient>, InitializingBean,
     public void destroy() throws Exception {
         try {
             if (client != null) {
+                LOGGER.info("close es client...");
                 client.close();
             }
         } catch (Exception e) {
