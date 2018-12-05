@@ -29,13 +29,25 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         LOGGER.info("s:{}",s);
         if (Objects.equals(s, "qdm")) {
-            List<SimpleGrantedAuthority> simpleGrantedAuthorities = Lists.newArrayList();
-            simpleGrantedAuthorities.add(new SimpleGrantedAuthority("perm"));
-
-            return new User("qdm", "123", simpleGrantedAuthorities);
+            return new User("qdm", "123", this.buildUserGrant());
         } else {
             throw new UsernameNotFoundException("该用户不存在");
         }
     }
+
+
+    /**
+     * 构造用户权限
+     * @return
+     */
+    private List<SimpleGrantedAuthority> buildUserGrant() {
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = Lists.newArrayList();
+        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("perm"));
+        return simpleGrantedAuthorities;
+    }
+
+
+
+
 
 }

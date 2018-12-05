@@ -20,12 +20,6 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 
-    @RequestMapping("/login_p")
-    public JsonResult login() {
-        LOGGER.info("login_p");
-        return JsonResult.FAILURE(ErrorCode.NEED_LOGIN);
-    }
-
     @RequestMapping("/get")
     public JsonResult get() {
         LOGGER.info("get");

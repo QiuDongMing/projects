@@ -43,8 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin().loginPage("/user/login_p").loginProcessingUrl("/login")
-                .usernameParameter("username").passwordParameter("password")
+                .formLogin()
+                .loginPage("/login_p")
+                .loginProcessingUrl("/login")
                 .successHandler(myAuthSuccessHandler)
                 .failureHandler(authenticationFailHandler)
                 .permitAll()
@@ -64,7 +65,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         System.out.println("auth = " + auth);
-
         auth.userDetailsService(userDetailServiceImpl);
     }
 
