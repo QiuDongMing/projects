@@ -10,6 +10,7 @@ public enum ErrorCode {
     FAILURE(0, "失败"),
     SUCCESS(1, "成功"),
 
+    NEED_LOGIN(401, "未登录"),
     FORBIDDEN_ACCESS(403, "禁止访问，无访问权限"),
 
     ERROR(100100, "服务器繁忙"),
@@ -18,11 +19,8 @@ public enum ErrorCode {
     USER_NOT_EXIT(100201, "用户不存在"),
     USER_DISABLED(100202, "用户被禁用"),
     ACCOUNT_NOT_EXIT(100203, "账户不存在"),
-    BAD_USERNAME_PASSWORD(100204, "用户名或密码错误"),
+    BAD_USERNAME_PASSWORD(100204, "用户名或密码错误");
 
-
-    INVALID_TOKEN(100301, "token失效"),
-    NEED_LOGIN(100302, "未登录");
 
 
     private Integer errorCode;

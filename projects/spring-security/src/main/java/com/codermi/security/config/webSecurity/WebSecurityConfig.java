@@ -1,14 +1,15 @@
-package com.codermi.security.config;
+package com.codermi.security.config.webSecurity;
 
 import com.codermi.security.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.Http401AuthenticationEntryPoint;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 
 /**
  * @author qiudm
@@ -24,7 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailServiceImpl userDetailServiceImpl;
 
     @Autowired
-    private MyAuthenticationFailHandler authenticationFailHandler;
+    private MyAuthFailHandler authenticationFailHandler;
+
+    @Autowired
+    private MyAuthSuccessHandler myAuthSuccessHandler;
+
+    @Autowired
+    private MyLogoutSuccessHandler myLogoutSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -33,20 +40,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .csrf().disable()
                 .authorizeRequests()
-
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin()
-                .failureHandler(authenticationFailHandler)
+                .formLogin().loginPage("/user/login_p").loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
-                .permitAll()  //开启登录
+                .successHandler(myAuthSuccessHandler)
+                .failureHandler(authenticationFailHandler)
+                .permitAll()
 
                 .and()
-                .exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("no login"))
+                .logout().logoutUrl("/logout").logoutSuccessHandler(myLogoutSuccessHandler)
+                .permitAll()
 
                 .and()
-                .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
+                .sessionManagement().maximumSessions(1);
 
     }
 
@@ -56,7 +64,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         System.out.println("auth = " + auth);
+
         auth.userDetailsService(userDetailServiceImpl);
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/index.html", "/static/**", "/user/login_p");
     }
 
 }

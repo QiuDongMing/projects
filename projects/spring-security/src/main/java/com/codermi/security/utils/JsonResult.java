@@ -53,6 +53,11 @@ public class JsonResult extends JSONObject {
     }
 
 
+    public static JsonResult FAILURE(ErrorCode errorCode) {
+        return new JsonResult(errorCode.getErrorCode(), errorCode.getErrMsg());
+    }
+
+
     public static JsonResult FAILURE(String resultMsg) {
         return new JsonResult(ErrorCode.FAILURE.getErrorCode(), resultMsg);
     }

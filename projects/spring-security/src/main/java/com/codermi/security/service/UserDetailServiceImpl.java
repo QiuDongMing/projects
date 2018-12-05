@@ -1,5 +1,6 @@
 package com.codermi.security.service;
 
+import com.google.common.collect.Lists;
 import javafx.beans.property.SimpleListProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +28,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         LOGGER.info("s:{}",s);
-        if(Objects.equals(s, "qdm")) {
-            List<SimpleGrantedAuthority> simpleGrantedAuthorities = new SimpleListProperty<>();
+        if (Objects.equals(s, "qdm")) {
+            List<SimpleGrantedAuthority> simpleGrantedAuthorities = Lists.newArrayList();
+            simpleGrantedAuthorities.add(new SimpleGrantedAuthority("perm"));
+
             return new User("qdm", "123", simpleGrantedAuthorities);
         } else {
-            throw new UsernameNotFoundException("用户不存在！");
+            throw new UsernameNotFoundException("该用户不存在");
         }
     }
 
