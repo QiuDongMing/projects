@@ -21,12 +21,19 @@ import static org.junit.Assert.*;
  */
 public class UserServiceTest extends BaseTest {
 
-
-
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceTest.class);
 
     @Autowired
     private UserService userService;
+
+
+    @Test
+    public void updateUserName() throws Exception {
+        userService.updateUserName(100000, "hello");
+    }
+
+
+
 
     @Test
     public void getByUserId() throws Exception {

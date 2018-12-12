@@ -21,13 +21,21 @@ public interface UserMapper {
     @Select({"select * from t_user"})
     List<User> getUserList();
 
-    @Insert({"insert into t_user(name, create_time) " +
+    @Insert({"insert into t_user(name, create_time) ",
             "values(#{name, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP})"
     })
     void insert(User user);
 
     @SelectProvider(type = UserSqlBuilder.class, method = "findByCondition")
     List<User> findByCondition(UserParam userParam);
+
+
+    @Update({
+            "update t_user",
+            "set name = #{name, jdbcType=VARCHAR}",
+            "where user_id = #{userId, jdbcType=VARCHAR}"
+    })
+    void update(User user);
 
 
 }

@@ -76,6 +76,13 @@ public class UserService {
     }
 
 
+    public void updateUserName(int userId, String name){
+        User user = new User();
+        user.setUserId(userId);
+        user.setName(name);
+        userMapper.update(user);
+    }
+
 
 
 }
