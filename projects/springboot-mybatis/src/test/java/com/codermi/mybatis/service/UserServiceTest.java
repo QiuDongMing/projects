@@ -52,7 +52,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void insert() throws Exception {
-        String name = "qdm3";
+        String name = "qdm4";
         int userId = userService.insert(name);
         System.out.println("userId = " + userId);
     }

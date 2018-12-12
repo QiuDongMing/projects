@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
@@ -33,11 +34,13 @@ public class UserService {
     }
 
 
+    @Transactional
     public int insert(String name) {
         User user = new User();
         user.setName(name);
         user.setCreateTime(new Date());
         userMapper.insert(user);
+
         return user.getUserId();
     }
 
