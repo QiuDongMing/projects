@@ -33,11 +33,12 @@ public class UserService {
     }
 
 
-    public void insert(String name) {
+    public int insert(String name) {
         User user = new User();
         user.setName(name);
         user.setCreateTime(new Date());
         userMapper.insert(user);
+        return user.getUserId();
     }
 
 

@@ -24,6 +24,7 @@ public interface UserMapper {
     @Insert({"insert into t_user(name, create_time) ",
             "values(#{name, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP})"
     })
+    @Options(useGeneratedKeys=true, keyProperty="userId", keyColumn = "user_id")//添加该行，id将被自动添加
     void insert(User user);
 
     @SelectProvider(type = UserSqlBuilder.class, method = "findByCondition")

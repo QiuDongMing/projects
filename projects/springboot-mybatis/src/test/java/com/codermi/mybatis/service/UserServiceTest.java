@@ -52,8 +52,9 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void insert() throws Exception {
-        String name = "qdm1";
-        userService.insert(name);
+        String name = "qdm3";
+        int userId = userService.insert(name);
+        System.out.println("userId = " + userId);
     }
 
     @Test
