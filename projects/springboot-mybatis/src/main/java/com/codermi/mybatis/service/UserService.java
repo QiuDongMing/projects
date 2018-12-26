@@ -1,5 +1,6 @@
 package com.codermi.mybatis.service;
 
+import com.codermi.mybatis.aspect.annotaion.LogAccess;
 import com.codermi.mybatis.data.entity.User;
 import com.codermi.mybatis.data.vo.UserVo;
 import com.codermi.mybatis.mapper.UserMapper;
@@ -7,7 +8,6 @@ import com.codermi.mybatis.mapper.param.UserParam;
 import com.codermi.mybatis.utils.Pagination;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class UserService {
         return user.getUserId();
     }
 
-
+    @LogAccess(remark = "获取用户列表")
     public Pagination<UserVo> getUserList(int pageNum, int pageSize) {
         Pagination<UserVo> pagination = new Pagination<>(pageNum, pageSize);
 
