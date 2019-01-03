@@ -1,22 +1,20 @@
-package com.codermi.mybatis;
+package com.qdm.mq;
 
-
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author qiudm
- * @date 2018/12/12 13:55
+ * @date 2018/12/29 14:55
  * @desc
  */
 @SpringBootApplication
-public class SpringBootMybatisApp {
-
+@EnableRabbit
+public class SpringBootMqApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootMybatisApp.class, args);
+        SpringApplication.run(SpringBootMqApplication.class, args);
     }
-
 
 }
