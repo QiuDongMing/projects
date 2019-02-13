@@ -30,7 +30,6 @@ public interface UserMapper {
     @SelectProvider(type = UserSqlBuilder.class, method = "findByCondition")
     List<User> findByCondition(UserParam userParam);
 
-
     @Update({
             "update t_user",
             "set name = #{name, jdbcType=VARCHAR}",

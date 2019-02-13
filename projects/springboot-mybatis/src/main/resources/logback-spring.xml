@@ -95,7 +95,7 @@
   </logger>
 
   <!-- 日志输出级别 ${logging.level}-->
-  <root level="${logging.level}">
+  <root level="INFO">
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="FILE-INFO"/>
     <appender-ref ref="FILE-ERROR"/>
