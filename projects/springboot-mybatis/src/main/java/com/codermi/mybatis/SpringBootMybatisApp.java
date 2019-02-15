@@ -4,6 +4,7 @@ package com.codermi.mybatis;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author qiudm
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @desc
  */
 @SpringBootApplication
+@EnableAsync
 public class SpringBootMybatisApp {
 
 

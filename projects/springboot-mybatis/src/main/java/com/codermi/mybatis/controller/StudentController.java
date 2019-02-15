@@ -2,6 +2,7 @@ package com.codermi.mybatis.controller;
 
 import com.codermi.mybatis.data.vo.StudentClassVo;
 import com.codermi.mybatis.service.StudentService;
+import com.codermi.mybatis.utils.StaticTestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class StudentController {
 
     @RequestMapping("/get/{id}")
     public StudentClassVo getStudentClassInfo(@PathVariable String id){
+        StaticTestUtil.print();
         return studentService.getById(id);
     }
-
 }
