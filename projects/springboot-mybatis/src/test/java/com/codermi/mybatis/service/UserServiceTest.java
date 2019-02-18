@@ -33,8 +33,6 @@ public class UserServiceTest extends BaseTest {
     }
 
 
-
-
     @Test
     public void getByUserId() throws Exception {
         int userId = 100000;
@@ -52,7 +50,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void insert() throws Exception {
-        String name = "qdm4";
+        String name = "qdm6";
         int userId = userService.insert(name);
         System.out.println("userId = " + userId);
     }

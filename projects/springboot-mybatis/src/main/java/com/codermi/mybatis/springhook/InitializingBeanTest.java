@@ -1,7 +1,6 @@
 package com.codermi.mybatis.springhook;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.annotation.Order;
 
 /**
  * @author qiudm

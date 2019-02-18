@@ -40,11 +40,11 @@ public class RedisLockAspect {
 
     @Around("redisLockPointcut()")
     public Object interceptor(ProceedingJoinPoint joinPoint) {
-        MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         Object[] args = joinPoint.getArgs();
         RedisLock redisLock = method.getAnnotation(RedisLock.class);
-        String redisKey = redisLock.key() +  getLockKey(method, args);
+        String redisKey = redisLock.key() + getLockKey(method, args);
         Object object = null;
         boolean lock = this.lock(redisKey, redisLock.expire());
         //没有获取到锁
@@ -69,7 +69,6 @@ public class RedisLockAspect {
             object = joinPoint.proceed();
         } catch (Throwable throwable) {
             this.unlock(redisKey);
-
         }
         return object;
     }
@@ -89,9 +88,10 @@ public class RedisLockAspect {
     }
 
 
-    private boolean lock(String redisKey, int expire){
+    private boolean lock(String redisKey, int expire) {
         long expireMillis = System.currentTimeMillis() + expire * 1000;
-        boolean locked = stringRedisTemplate.opsForValue().setIfAbsent(redisKey, String.valueOf(expireMillis));
+        boolean locked = stringRedisTemplate.opsForValue()
+                .setIfAbsent(redisKey, String.valueOf(expireMillis));
         if (locked) {
             stringRedisTemplate.expire(redisKey, expire, TimeUnit.SECONDS);
             return true;
@@ -100,8 +100,8 @@ public class RedisLockAspect {
 
         if (expireTimeMillisDb == null || Long.valueOf(expireTimeMillisDb) < System.currentTimeMillis()) {//过期
             String newExpireTimeMillis = String.valueOf(System.currentTimeMillis() + expire * 1000);
-            String oldExpireTimeMillis = stringRedisTemplate.opsForValue().getAndSet(redisKey, newExpireTimeMillis);
-
+            String oldExpireTimeMillis = stringRedisTemplate.opsForValue()
+                    .getAndSet(redisKey, newExpireTimeMillis);
             if (oldExpireTimeMillis == null
                     || expireTimeMillisDb == oldExpireTimeMillis
                     || expireTimeMillisDb.equals(oldExpireTimeMillis)) {
@@ -113,24 +113,9 @@ public class RedisLockAspect {
     }
 
 
-
     private void unlock(String redisKey) {
         stringRedisTemplate.delete(redisKey);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

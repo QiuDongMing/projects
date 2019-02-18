@@ -40,7 +40,6 @@ public class UserService {
         user.setName(name);
         user.setCreateTime(new Date());
         userMapper.insert(user);
-
         return user.getUserId();
     }
 

@@ -6,14 +6,12 @@ import com.codermi.mybatis.data.vo.StudentScoreVo;
 import com.codermi.mybatis.event.EmailEvent;
 import com.codermi.mybatis.mapper.StudentMapper;
 import com.codermi.mybatis.utils.SpringContextUtil;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author qiudm
@@ -23,6 +21,8 @@ import javax.validation.constraints.NotNull;
 @Service
 @Transactional
 public class StudentService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentService.class);
 
     @Autowired
     private StudentMapper studentMapper;
